@@ -1,28 +1,27 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/db.js';
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "../config/db.js";
 
-export class User extends Model { }
+export class User extends Model {}
 
-User.init({
+User.init(
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     username: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    joinedAt: {
-        type: DataTypes.DATE,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     socketId: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
-    modelName: 'User',
-    tableName: 'users'
-});
+    modelName: "User",
+    tableName: "users",
+  },
+);

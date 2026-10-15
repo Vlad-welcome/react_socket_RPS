@@ -1,1 +1,1 @@
-export { Chat } from "./Chat/Chat.jsx";
+export { Game } from "./Game/Game.jsx";
