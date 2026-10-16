@@ -26,6 +26,13 @@ class userService {
     });
     return user;
   }
+
+  async getByName(name) {
+    const user = await User.findOne({
+      where: { username: name },
+    });
+    return user;
+  }
 }
 
 export default new userService();
