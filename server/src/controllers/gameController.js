@@ -1,5 +1,6 @@
 import boardService from "../services/boardService.js";
 import userService from "../services/userService.js";
+import cellService from "../services/cellService.js";
 import { Events } from "../../../packages/shared/socketEvents.js";
 
 export const gameController = async (io, socket) => {
@@ -27,6 +28,22 @@ export const gameController = async (io, socket) => {
     console.log("Server Events.GAME_START");
     io.to(playerSocketId).emit(Events.GAME_STARTED, {
       start: true,
+      playerSocketId: socket.id,
     });
+  });
+
+  socket.on(Events.NEXT_TURN, async (boardId, cellId, player, enemySocketId) => {
+    console.log("Server Events.NEXT_TURN");
+    await cellService.create(boardId, cellId, player);
+    io.to(enemySocketId).emit(Events.NEXT_TURNED, {
+      cellId: cellId,
+      player: player,
+    });
+  });
+
+  socket.on(Events.EXIT, async (boardId, enemySocketId) => {
+    console.log("Server Events.EXIT");
+    await boardService.delete(boardId);
+    io.to(enemySocketId).emit(Events.EXITED);
   });
 };

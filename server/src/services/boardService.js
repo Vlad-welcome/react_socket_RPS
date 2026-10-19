@@ -1,6 +1,4 @@
 import { Board } from "../models/boardModel.js";
-import { User } from "../models/userModel.js";
-import { sequelize } from "../config/db.js";
 
 class boardService {
   async create(userId) {
@@ -11,6 +9,13 @@ class boardService {
   async join(boardId, userId) {
     const [affectedRows] = await Board.update({ userId_2: userId }, { where: { id: boardId } });
     return affectedRows > 0;
+  }
+
+  async delete(id) {
+    const count = await Board.destroy({
+      where: { id: id },
+    });
+    return count > 0;
   }
 }
 

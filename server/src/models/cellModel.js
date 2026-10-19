@@ -15,6 +15,10 @@ Cell.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    cellId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     boardId: {
       type: DataTypes.INTEGER,
       allowNull: false,
